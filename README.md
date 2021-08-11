@@ -335,7 +335,7 @@ greeting("Good Day", "Rita");
 
 ============
 
-HOF:
+HOF: Closure
 
 function greeting(msg) {
 	return function(name) {
@@ -361,7 +361,301 @@ getEmployee(24); ==> give it from cache
 
 =====================================
 
-HOF ==> caching
+HOF ==> caching ==> memoize pattern
+
+========================================
+https://addyosmani.com/resources/essentialjsdesignpatterns/book/
+
+======================================================================
+
+ES5 version
+
+ES6 / ES2015 ==> ECMAScript
+
+ESNext
+
+==================================
+https://caniuse.com/
+
+ES6/ES7 ==> transpile / transcompiler ==> ES5
+
+Babel
+Babel is a free and open-source JavaScript transcompiler that is mainly used to convert ECMAScript 2015+ code into a backwards compatible version of JavaScript
+
+Tracuer: by google
+Traceur is a JavaScript.next-to-JavaScript-of-today compiler that allows you to use features from the future today.
+
+=============================================
+
+ES6 features:
+
+1) Arrow functions
+
+	var add = (x,y) => x + y;
+
+   can have default values
+
+   var add = (x = 0, y = 0, z = 0) => x + y + z;
 
 
+   add();
+   add(66);
+   add(4,5);
+   add(5,6,1);
+
+ 2) Destructuring
+  2.1) array
+
+  	var colors = ["red", "green", "orange", "pink" , "lavender"];
+
+  	Traditional way:
+
+  	var r = colors[0];
+  	var g = colors[1];
+
+  	ES6 way:
+
+  	var [r, g, ...others] = colors;
+
+  2.2) object
+
+  var product = { "id": 1, "name": "iPhone", "price": 124447.44, "category": "mobile" };
+
+  var {name, price} = product;
+  console.log(name, price);
+  
+  OR
+
+   var {name:n, price:p} = product;
+   console.log(n, p);
+
+  Before ES6:
+ console.log(product.name, product.price);  
+
+3) Scope variable [let] and constant [ const ]:==> Block variable
+
+
+let g = 100;
+const PI = 3.14159;
+
+function doTask() {
+	let a = 10;
+	if( g > a ) {
+		let b = 20; // not hoisted
+		c = 50;
+	}
+	console.log(g, a, b, c); // b is not visible
+}
+
+doTask();
+ 
+
+4) Clone
+
+  var product = { "id": 1, "name": "iPhone", "price": 124447.44, "category": "mobile" };
+
+  var ref = product; // reference
+
+  ref.price = 55555;
+
+
+  var clone = {...product}; // spread operator
+
+ 5) Template String [``]
+ 	
+ 	ES5 supports 2 string literals as in:
+ 	"Gopal" or 'Hema'
+
+ 	 var product = { "id": 1, "name": "iPhone", "price": 124447.44, "category": "mobile" };
+
+
+ 	 var content = `
+ 	 		<div>
+ 	 			<div class="header"> ${product.name}</div>
+ 	 			<div class="body">
+ 	 					${product.category} <br />
+ 	 					Price: ${product.price}
+ 	 			</div>
+ 	 		</div>
+ 	 `;
+
+ 6) Promise API for Asynchronous based operations [ Callable and Future in Java]
+
+ 	Promise can be resolved or rejected
+
+ 	make a call to Server ==> server promises to return with resolved / rejected
+
+ 	Synchronous code: 
+
+ 	let result = doTask(); // blocking code
+ 	console.log("end!!"); // executes only after doTask completes
+
+
+ 	ASynchronous code: assumption doTask returns Promise 
+
+ 	doTask().then(
+ 		(data) => console.log(data),
+ 		(rejected) => console.log("Boom:-(" , rejected)
+ 	).catch(ex) {
+ 		console.log(ex);
+ 	}
+
+ 	console.log("end!!"); // not blocked
+
+
+
+ 	fetch('http://jsonplaceholder.typicode.com/users/1')
+ 		.then( response => response.json())
+ 		.then(data => console.log(data));
+
+==========
+
+API:
+
+pull the customer info
+pull the order info
+
+Customer + order info to client
+
+==========
+
+pull the data from different CDN
+use data coming from the first CDN
+
+==================
+
+7) async and await
+
+============
+
+https://microservices.io/patterns/data/saga.html
+https://redux-saga.js.org/
+
+
+8) Generator are functions which can return multiple values over a time line
+
+	function* dataGenerator() {
+		console.log("task1");
+		console.log("task2");
+		console.log("task3");
+
+		yield "my first data";
+		
+		console.log("task4");
+		console.log("task5");
+
+		yield 100;
+	}
+
+
+	let iter = dataGenerator();
+	iter.next();
+	...
+	iter.next();
+
+9) ES 6 module system and class
+
+================================================
+https://nodejs.org/en/download/
+
+NodeJS ==> platform with V8 engine + libuv libraries to handle Threads and Async OS call
+
+What can i use NodeJS for?
+1) build APIs ==> RESTful Web services / GraphQL ==> ApolloServer
+2) Real time application [ ChatBot + admin dashboard] 
+3) Streaming platform [ OTT ]
+4) use this platform for build web client application [ React , Angular, Vue, Backbone]
+	==> we may choose ES6/7 or TypeScript or CoffeeScript or DART 
+
+----------------
+
+NodeJS comes with many pre-defined modules [ fs, http, url, crypto, cluster,..]
+
+Manage Modules ==> download, publish
+ 1) NPM ==> node package manager
+ 2) YARN
+
+ similar to PIP
+
+=============
+
+every project contains "node_modules" folder where the downloaded modules reside
+we can download to global ==> /users/usersname/AppData/Roaming/ ==> executables
+
+Module System: Vanilla JS module system, ES6, AMD, CommonJS
+
+NODEJS uses CommonJS module System
+
+a.js
+module.exports.add = function(x, y) { }
+
+function sub() { }
+
+
+b.js
+let add = require('./a').add;
+console.log(add(3,5))
+
+===========================
+AAA ==> Assemble Action Assert
+
+
+$ npm i mocha chai request -D
+
+-D is to inform its development dependency
+
+mocha ==> Unit testing library for JS
+	alternate ==> Jasmine, JEST
+
+chai ==> Assertion library [ https://www.chaijs.com/]
+
+
+
+
+ "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.0.3",
+    "request": "^2.88.2"
+  }
+
+
+  "chai": "^4.3.4" ==> any version greater or equal to 4.3.4
+
+  "chai": "4.3.4", ==> exact version
+
+  "chai": "~4.3.4", ==> major version has to be "4"
+
+
+  =======
+
+  npm i
+
+  =======================================================
+ Java ==> Maven / Gradle/ Ivy/ Builder / ANT
+
+  JavaScript Build tools
+  Grunt, Gulp and Webpack
+
+  Grunt is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting. It uses a command-line interface to run custom tasks defined in a file
+
+--------------
+
+Angular, React or modern frameworks uses Webpack as default build tool
+
+==========================================================================
+
+npm run build-dev
+
+builds a file "bundle.js" which contains index.js + Person.js + math.js after transpile
+
+npm run build-prod
+
+
+builds a file "bundle.js" which contains minified + uglified code of  index.js + Person.js + math.js after transpile
+
+==================
+
+9:00 to 5:00
+
+==========================
 
