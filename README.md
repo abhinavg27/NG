@@ -15,6 +15,7 @@ banuprakashc@yahoo.co.in
 https://www.linkedin.com/in/banu-prakash-50416019/
 
 https://github.com/BanuPrakash/NG
+
 ----------------------------------------------------------
 
 Softwares Required:
@@ -23,6 +24,8 @@ Softwares Required:
 3) NodeJS Latest LTS
 
 ----------------------------------------------------
-Day 1) JS, ES2015/ ES6, NodeJS, Webpack and TypeScript
-Day 2 and 3) Angular
+
+* Day 1) JS, ES2015/ ES6, NodeJS, Webpack and TypeScript
+* Day 2 and 3) Angular
+
 -------------------------------------------------------
