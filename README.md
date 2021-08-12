@@ -1180,4 +1180,11 @@ export class CustomersComponent implements OnInit {
 </div>
 
 ======================================================
+FormsModule:
 
+app.module.ts
+import {FormsModule} from '@angular/forms';
+
+imports: [
+    BrowserModule, FormsModule
+ ],

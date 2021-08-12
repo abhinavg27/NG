@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import Customer from '../common/Customer';
 
 
 @Component({
   selector: 'app-customers-card',
   templateUrl: './customers-card.component.html',
-  styleUrls: ['./customers-card.component.css']
+  styleUrls: ['./customers-card.component.css'],
 })
 export class CustomersCardComponent implements OnInit {
 

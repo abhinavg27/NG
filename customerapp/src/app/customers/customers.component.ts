@@ -9,12 +9,15 @@ import Customer from '../common/Customer';
 export class CustomersComponent implements OnInit {
 
   customers: Customer[] = [];
+  original:Customer[] = [];
 
+  isCard:boolean = true;
+  searchText:string = "";
   constructor() { }
 
   ngOnInit(): void {
     // REST api call to pull customers
-    this.customers = [{
+    this.customers = this.original=  [{
       "id": 1,
       "firstName": "Rachel",
       "lastName": "Green ",
@@ -61,5 +64,11 @@ export class CustomersComponent implements OnInit {
 
   deleteCustomer(id:number) :void {
     this.customers = this.customers.filter(c => c.id !== id);
+  }
+
+  filterCustomers(): void {
+    this.customers = this.original.filter( c => {
+      return c.lastName.toLowerCase().indexOf(this.searchText.toLowerCase()) >= 0
+    })
   }
 }
