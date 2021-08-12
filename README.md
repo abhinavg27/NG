@@ -947,3 +947,184 @@ npm run build-dev
 ===========================
 
 
+npm i -g @angular/cli@latest
+
+ng --version
+
+=====================================
+
+@angular/cli ==> to generate a scaffolding code for angular
+
+Without @angular/cli 
+
+npm init --y
+webpack.config.js
+tsconfig.json
+npm install all dependencies
+
+
+https://stackblitz.com/
+
+================================
+Create a scaffolding code 
+ng new customerapp
+> no to Anular Routing
+> CSS
+
+=========================
+Web site/page ==> JS / jQuery / JS templates Handlebars/ Mustache
+
+Interpolation:
+<p>{{firstname}} {{lastname}}</p>
+
+{
+  firstname: "Yehuda",
+  lastname: "Katz",
+}
+
+<p>Yehuda Katz</p>
+
+Build client side web application
+
+SPA ==> Single Page Application => index.html
+* Two Way binding
+	==> data from server is rendered into view
+	==> any changes in view has to be sent to server
+* Dependency Injection ==> IOC ==> Inversion of Control
+	CustomerModule ==> set of js + template 
+	PaymentModule ==> set of ts + template
+	OrderModule ==> set of ...
+	CommonModule
+
+	OrderModule needs/ depends on PaymentModule + CustomerModule + CommonModule
+* Lazy loading of modules ==> core web vitals ==> FCP [ white screen]
+* we need to display different views for different URI
+
+	http://cisco.com
+	http://cisco.com/products
+	http://cisco.com/locations
+
+	==> SEO
+	==> Bookmark
+		http://amazon.com/mobiles/iphone/12
+  ==> Navigate between views / not pages
+  	http://amazon.com/mobiles/pixel/2
+  ==> Protect few URL / Guard Routes
+  http://amazon.com/checkout
+
+  History API ==> HTML
+	
+===============
+1) Backbone
+2) Angular
+3) React
+4) Vue
+
+Angular ==> Framework ==> complete solution
+React ==> view library ==> Facebook
+
+==========================
+Angular.js [1.6] with Angular [2+ ==> 12] ==> Google
+
+Angular Framework Building blocks:
+
+1) Module
+	AppModule, CustomerModule, OrderModule, PayModule
+
+2) Component
+		View Components ==> Wireframe ==> UI/UX
+		finegrained / Coarsegrained
+
+		2.1) class with state [customer] and behaviour [ CustomerComponent ==> CRUD on Customer]
+		2.2) @Component
+			==> template [ html ]
+			==> styles [ CSS ]
+3) Services
+		==> business logic
+		==> API calls ==> fetch or AJAX
+		==> data is shared between components
+4) Router Module
+5) Directives
+		can be used along with DOM elemnents and Component
+		==> additional behaviour which doesn not imply to CRUD [ like border / highlight]
+		HoverDirective
+6) Pipe
+		to transform Data
+		Date ==> dd-MMM-yyyy or yyyy MM dd
+		Numbers ==> 45,0000.00 or 45.0000 00
+		{firstName | upper }
+
+		{amount | currency}
+7) HTTPInterceptors
+		sending tokens [JWT], encrypt
+
+		HTTP
+
+		Authorization: Bearer jwt
+8) Guard
+	to protected access from un-authorized users
+
+==============
+
+hides webpack.config.json
+But webpack.config.json uses "angular.json" where I can customize
+
+===========
+
+entry point is "src/main.ts"
+
+	loads/Bootstrap ==> AppModule
+	platformBrowserDynamic().bootstrapModule(AppModule)
+
+Module ==> components + directives + pipes + services
+
+app.module.ts
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+ declarations ==> all components of module
+ imports ==> dependencies
+ providers ==> services are configured
+  bootstrap: [AppComponent] ==> first component to be displayed ==> view
+
+==
+AppComponent
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'customerapp'; //state
+}
+
+index.html
+<app-root></app-root>
+
+=======
+
+customerapp> npm start
+
+tsc ==> build
+uses webpack-light-dev-server 
+deploys bundle on the server
+
+=============================
+npm i bootstrap@4.6.0 font-awesome@4.7.0
+
+
+Bootstrap/ Bulma / Zurb RWD ==>
+
+
+
