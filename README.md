@@ -655,7 +655,295 @@ builds a file "bundle.js" which contains minified + uglified code of  index.js +
 
 ==================
 
-9:00 to 5:00
+Day 2
 
-==========================
+---------
+
+JavaScript, ES 6, NodeJS, Webpack [bundler]
+
+
+TypeScript
+
+-----------
+is a superset of JavaScript, static typing
+
+types:
+
+1) Number
+
+var age:number = 22;
+
+age = "Twenty"; // error
+
+In engine "var age"
+
+2) String
+
+var name:string = "Tim";
+
+3) Boolean
+
+var flag:boolean = true;
+
+4) Arrays
+
+var data:number[] = [4,2,5,21];
+
+OR
+
+var data:Array<number> = [5,2,1];
+
+5) enum
+
+enum Priority {
+	LOW, MED, HIGH
+}
+
+var task:Priority = Priority.MED;
+
+
+6) any
+
+var data:any;
+
+data = doTask();
+
+if( typeof(data) == "number") {
+	data++;
+} else if ( typeof(data) == "string") {
+	data.toUpperCase();
+}
+
+data.id;
+data.name;
+
+7) unknown
+
+var data:unknown;
+	// difference between any and unknown is "unknown" won't allow any methods or properties to be called on data
+
+	data.toUpperCase(); // ERROR
+
+	data.name; // ERROR
+
+8) never
+	 
+	 function someTask(): number | never {
+	 	if(condition) return 100;
+	 	throw new Error("Boom :-(");
+	 }
+
+9) Tuple
+
+	var data:[string,number] = ["Hello", 123];
+
+10) interface
+	
+		==> realization relationship
+
+		interface Flyable {
+			void fly();
+		}
+
+		class Bird implements Flyable {
+			//
+
+			void fly() {
+
+			}
+		}
+
+
+		class AeroPlane implements Flyable {
+			//
+			void fly() {
+
+			}
+		}
+
+		==> to define a Shape
+
+		interface Person {
+			id:number,
+			name:string,
+			address?:string
+		}
+
+		function addPerson(p:Person) : void {
+			//
+		}
+
+		addPerson({"id": 12, "name": "Harry"}); // valid
+
+		addPerson({"id": 12, "name": "Harry", "address" : "some address"}); // valid
+
+		addPerson({"id": 12, "address" : "some address"}); // ERROR
+
+11) class
+		
+		class Person {
+			private id:number;
+			private name:string;
+
+			constructor(id:number, name:string) {
+				this.id = id;
+				this.name = name;
+			}
+
+			getName() : string {
+				return this.name;
+			}
+
+			getId() : number {
+				return this.id;
+			}
+		}
+
+		let p = new Person(12,"A");
+
+		p.id; // error
+
+		========
+
+		class Person {
+			constructor(private id:number, private name:string) {
+			}
+
+			getName() : string {
+				return this.name;
+			}
+
+			getId() : number {
+				return this.id;
+			}
+		}
+
+	==============================
+
+	Babel: ==> ES6 ==> ES5
+
+	TypeScript Compiler: file.ts ==> file.js
+
+
+	npm i -g typescript
+
+// IIFE (function(){})();
+
+ // IIFE
+	var mod1 = (function() {
+			data = 100;
+			function doTask() {
+				console.log(data);
+			};
+
+			function increment() {
+				data++;
+			};
+
+			return {
+				doTask,
+				increment
+			};
+	})();
+
+
+	var mod2 = (function() {
+			 data = 500;
+			 name = "Test";
+			function print() {
+				console.log(data)
+			}
+
+			function increment() {
+				data++;
+			}
+	})();
+
+
+mod1.increment(); // 101
+
+mod2.increment(); // 501
+
+=========================================
+similar to Annotations in Java
+
+12) Decorator ==> Metadata [ @DecoratorName(properties)]
+	Internally it's a HOF function returns a function
+
+public class Component {
+
+}
+
+@Component({
+	"selector": "customers"
+})
+public class CustomerComponent extends Component {
+
+}
+
+Object.defineProperty(CustomerComponent, 'selector', {
+  value: "<customers>",
+  writable: false
+});
+
+<customers></customers>
+
+interface ComponentConfig {
+	selector:string,
+	templateUrl?:string,
+	styleUrls?:string
+}
+
+@Component({
+	"selector": "products"
+})
+public class ProductComponent   extends Component
+
+Object.defineProperty(CustomerComponent, 'sel{
+
+}
+
+export function Component(config:ComponentConfig) {
+     return function(target:Component) {
+        Object.defineProperty(target.prototype, "selector", {
+            "value" : config.selector
+        })
+    }
+}
+
+
+without Decorator:
+
+
+ 
+public class CustomerComponent {
+		"selector": string = "<customers>";
+}
+
+public class ProductComponent {
+		"selector": string = "<products>";
+}
+
+===========
+
+public class Product {
+
+	@NotBlank()
+	name:string;
+}
+
+==============================================
+
+
+tsc --experimentalDecorators=true Person.ts
+
+
+npm start
+npm test
+
+npm run clean
+npm run build-dev
+
+===========================
+
 
