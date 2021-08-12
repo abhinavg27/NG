@@ -1128,3 +1128,56 @@ Bootstrap/ Bulma / Zurb RWD ==>
 
 
 
+ng generate component customers
+OR
+ng g c customers
+
+
+constructor() { } vs  ngOnInit(): void {}
+
+if initialization dependens on Dependency [ services / modules] do it in ngOnInit()
+
+
+
+Angular Directives: 
+Structural Directive: *ngFor *ngIf
+
+Structural Directives are directives which change the structure of the DOM by adding or removing elements. 
+
+==========
+
+import { Component, OnInit } from '@angular/core';
+import Customer from '../common/Customer';
+
+@Component({
+  selector: 'app-customers',
+  templateUrl: './customers.component.html',
+  styleUrls: ['./customers.component.css']
+})
+export class CustomersComponent implements OnInit {
+
+  customers: Customer[] = [];
+
+  constructor() { }
+
+  ngOnInit(): void {
+    // REST api call to pull customers
+    this.customers = [{
+    ...
+    },
+    {
+     ...
+    }
+    ];
+  }
+
+}
+
+====
+
+<div *ngFor="let customer of customers">
+    {{customer.firstName}}   {{customer.lastName}}
+</div>
+
+======================================================
+
