@@ -12,7 +12,8 @@ import {Route, RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { TextconvertPipe } from './common/textconvert.pipe';
 import { LinkGuardGuard } from './link-guard.guard';
-
+import {HttpClientModule} from '@angular/common/http';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 const routes: Route[] = [
   {
     path: 'customers',
@@ -45,10 +46,11 @@ const routes: Route[] = [
     CustomersListComponent,
     AppHoverDirective,
     HomeComponent,
-    TextconvertPipe
+    TextconvertPipe,
+    CustomerEditComponent
   ],
   imports: [
-    BrowserModule, FormsModule, RouterModule.forRoot(routes)
+    BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

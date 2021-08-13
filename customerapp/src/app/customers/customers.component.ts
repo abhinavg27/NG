@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Customer from '../common/Customer';
+import { DataService } from '../common/data.service';
 
 @Component({
   selector: 'app-customers',
@@ -13,57 +14,18 @@ export class CustomersComponent implements OnInit {
 
   isCard:boolean = true;
   searchText:string = "";
-  constructor() { }
+  constructor(private dataService: DataService) { }
 
   ngOnInit(): void {
     // REST api call to pull customers
-    this.customers = this.original=  [{
-      "id": 1,
-      "firstName": "Rachel",
-      "lastName": "Green ",
-      "gender": "female",
-      "address": "Blore"
-    },
-    {
-      "id": 2,
-      "firstName": "Chandler",
-      "lastName": "Bing",
-      "gender": "male",
-      "address": "West Street"
-    },
-    {
-      "id": 3,
-      "firstName": "Joey",
-      "lastName": "Tribbiani",
-      "gender": "male",
-      "address": "Kattegat"
-    },
-    {
-      "id": 4,
-      "firstName": "Monica",
-      "lastName": "Geller",
-      "gender": "female",
-      "address": "some address"
-    },
-    {
-      "id": 5,
-      "firstName": "Ross",
-      "lastName": "Geller",
-      "gender": "male",
-      "address": "some address "
-    },
-    {
-      "id": 6,
-      "firstName": "Phoebe",
-      "lastName": "Buffay",
-      "gender": "female",
-      "address": "some address"
-    }
-    ];
+    this.dataService.getCustomers().subscribe(data => {
+      this.customers = this.original = data;
+    });
   }
 
   deleteCustomer(id:number) :void {
     this.customers = this.customers.filter(c => c.id !== id);
+    this.dataService.deleteCustomer(id).subscribe(() => console.log("deleted!!!"));
   }
 
   filterCustomers(): void {

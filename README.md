@@ -1499,12 +1499,127 @@ source$
   source$.subscribe(x => console.log(x));
 
 ======================
+ 
+Shared Service:
 
-Spring WebFlux 
+@Injectable({
+  providedIn: 'root'
+})
+export class SharedService {
+  data: any[] = [];
+  subject: Subject<any> = new Subject();
+  constructor() { }
 
-=============
+  getSubject(): Subject<any> {
+    return this.subject;
+  }
 
-Anguar Service post lunch @2:00
+  addData(elem) {
+    this.data.push(elem);
+    this.subject.next(this.data);
+  }
+}
 
-====================================
+===
+
+@Component({
+  selector: "my-app",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"]
+})
+export class AppComponent {
+  constructor(private sharedService: SharedService) {}
+
+  ngOnInit(): void {
+    setInterval(() => {
+      this.sharedService.addData(new Date());
+    }, 2000);
+  }
+}
+
+
+=====
+
+
+@Component({
+  selector: "hello",
+  template: `
+    <div *ngFor="let d of information">
+        {{d}}
+</div>
+  `,
+  styles: [
+    `
+      h1 {
+        font-family: Lato;
+      }
+    `
+  ]
+})
+export class HelloComponent {
+  information: any[] = [];
+  constructor(private sharedService: SharedService) {}
+
+  ngOnInit(): void {
+    this.sharedService.getSubject().subscribe(data => {
+      this.information = data;
+    });
+  }
+}
+
+==============================
+Promise ==> single time value is returned from the source
+   
+rxjs ==> reactive Library ==> series of values over a period time
+	==> Dashboard
+	==> operators ==> filter, debounce, skip, limit, map, ..
+	==> Observable-Observer pattern
+
+------------
+
+Angualr ==> Service class @Injectable ==> can be injected 
+
+Service to share info between components which are not parent-child [@ViewChild, @Input and @Output]
+
+import { delay } from 'rxjs/operators';
+import { of, zip } from 'rxjs';
+
+const sourceOne = of('Hello');
+const sourceTwo = of('World!');
+const sourceThree = of('Goodbye');
+const sourceFour = of('World!');
+//wait until all observables have emitted a value then emit all as an array
+const example = zip(
+  sourceOne,
+  sourceTwo.pipe(delay(1000)),
+  sourceThree.pipe(delay(2000)),
+  sourceFour.pipe(delay(3000))
+);
+//output: ["Hello", "World!", "Goodbye", "World!"]
+const subscribe = example.subscribe(val => console.log(val));
+
+=====================================
+
+Fake RESTful services
+
+JSON Server ==> full fake REST API 
+
+npm install -g json-server
+json-server --watch data.json --port 1234
+
+OR
+
+npx json-server --watch data.json --port 1234
+
+http://localhost:1234/customers
+http://localhost:1234/orders
+
+http://localhost:1234/customers/4
+
+http://localhost:1234/customers?gender=female
+
+
+
+
+ 
 
