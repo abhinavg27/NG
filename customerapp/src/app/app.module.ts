@@ -7,6 +7,32 @@ import { CustomersComponent } from './customers/customers.component';
 import { CustomersCardComponent } from './customers-card/customers-card.component';
 import { CustomersListComponent } from './customers-list/customers-list.component';
 import { AppHoverDirective } from './common/app-hover.directive';
+ 
+import {Route, RouterModule} from '@angular/router';
+import { HomeComponent } from './home/home.component';
+
+const routes: Route[] = [
+  {
+    path: 'customers',
+    component :CustomersComponent
+  },
+  {
+    path: 'home',
+    component :HomeComponent
+  },
+  {
+    path: '',
+    component :HomeComponent
+  },
+  {
+    path: 'orders',
+    loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
+  },
+  {
+    path: '**',
+    component :HomeComponent
+  },
+]
 
 @NgModule({
   declarations: [
@@ -14,10 +40,11 @@ import { AppHoverDirective } from './common/app-hover.directive';
     CustomersComponent,
     CustomersCardComponent,
     CustomersListComponent,
-    AppHoverDirective
+    AppHoverDirective,
+    HomeComponent
   ],
   imports: [
-    BrowserModule, FormsModule
+    BrowserModule, FormsModule, RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

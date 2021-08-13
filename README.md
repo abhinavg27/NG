@@ -1191,8 +1191,204 @@ imports: [
 
 ================================
 
+@Input() ==> property is passed from parent to child
+
+	Parent {
+		data:string = "Tim";
+	}
+
+	<child [name] ="data"></child>
+
+	class child {
+			@Input()
+			name:string = "";
+	}
+
+
+@Output() => EventEmitter ==> emit
+
+	Parent {
+
+		doTask(str:string) {
+
+		}
+	}
+
+	<child (someEvent)="doTask($event)"></child>
+
+	child {
+
+		@Output()
+		someEvent:EventEmitter<string> = new EventEmmiter<string>();
+
+		task() {
+			this.someEvent.emit("hello");
+		}
+	}
+===================
+two-way binding usings FormsModule
+<input type="text" [(ngModel)] ="searchText">
+
+componet {
+	searchText:string = ""
+}
+
+[] ==> property
+() ==> event
+[()] ==> two-way binding
+
+======================================
+
 Angular Test Bed
 
 ======================
+index.html => <app-root></app-root> ==> <app-customers></app-customers>
+
+TestBed ==> Virtual rendering of Component 
+
+
+
+@Directive({
+  selector: '[appHover]'
+})
+export class AppHoverDirective {
+constructor(private el:ElementRef, private renderer: Renderer2) { }
+
+<button appHover>Click</button>
+
+<app-customers-card appHover></app-customers-card>
+
+HostBinding - Declares a host property binding.
+
+
+ng g c example
+
+=================
+
+ Service / RouterModule ==> Lazy loading / EditCustomer ==> templateRef/
+  Guard / Pipe / 
+@ViewChild / ChangeDetection 
+
+===========
+
+
+Day 3
+
+Angular 
+* built on NodeJS environment; runs on Web Browser / Mobile app [NG + Ionic]
+* build tool to develop; compile; test; lint ; bundle ==> Gulp / Grunt / Webpack
+
+* Command line interface to build scaffolding code
+npm install -g @angular/cli 
+
+* ng new nameofapp ==> package.json all dependencies =>
+also creates app.module.ts and app.component.ts
+
+* angular.json file where we can customize which is what is used by webpack.config.json
+
+* angular.json ==> entry point "main.ts"; where are my assets [ src/assets]; "styles.css" is configured as global styling; app.component.css ; customers.component.css
  
+"styles.css" ==> including any 3rd party css libraries ==> font-awesome; bootstrap [ RWD]
+
+-------------
+Core Web Vitals ==> FCP
+
+* main.ts ==> bootstraps AppModule ; uses platformBrowserModule
+
+@NgModule({
+	"declarations": [places where components and directives],
+	"services": [ place where all services of this module],
+	"imports" : [ dependencies on other module ==> BrowserModule + FormsModule],
+	"bootstrap" : [ AppComponent]
+})
+
+AppModule will load all the resources added in module:
+=> declarations ==> places where components and directives
+
+index.html
+	<app-root></app-root>
+
+AppComponent ==> CustomersComponent ==> CustomersCardComponent or CustomersListComponent
+
+===========================
+
+<app-root></app-root> ==> new AppComponent() ==> constructor() ==> any init if required indendent of dependencies; if initililzation dependes on dependcy [ parent input or service]
+==> ngOnInit()
+
+<app-root></app-root> ==> new AppComponent()
+
+==========================================
+Component ==> will have state + behaviour [ Decorators adds selector + template/ templateUrl
++ style / styleUrl]
+
+Directive ==> to be used as property on DOM or component
+
+<customers-card appHover> </customers-card>
+
+<div appHover></div>
+
+==> behaviour which doesn't involve mutation of state of entity [ No CRUD operations]
+==> most of the time like controlling styling
+
+=========================
+
+Router Module
+
+ng new customerapp
+
+ "@angular/router": "~12.2.0",
+
+http://localhost:4200/
+
+should display landing page
+
+http://localhost:4200/about
+
+http://localhost:4200/customers
+
+http://localhost:4200/order
+
+====================================
+ng g c home
+
+Adding new Module:
+* ng g module order
+* ng g c order/orders --module=order/order.module.ts 
+
+
+const routes: Route[] = [
+  {
+    path: '',
+    component :OrdersComponent
+  },{
+    path: 'dashboard',
+    component :DashboardComponent
+  },
+  {
+    path: 'report',
+    component :ReportComponent
+  }
+]
+
+
+http://localhost:4200/order ==> OrdersComponent
+http://localhost:4200/order/dashboard ==> DashboardComponent [ Chart.js ; D3.js; nvd3.js ]
+http://localhost:4200/order/report ==> ReportComponent
+
+=========
+	href is Server side routing -=> call to server => server sends the response
+
+  <a class="nav-link" href="/customers">Customers</a>
+
+ routerLink ==> no server call ==> client side routing
+ ==> looks for Route config and loads the component matching the route in
+ <router-outlet></router-outlet>
+
+ <a class="nav-link" href="#" routerLink="/customers">Customers</a>
+
+===========
+
+Services ==> Resume @ 11:10
+
+
 
