@@ -1386,9 +1386,125 @@ http://localhost:4200/order/report ==> ReportComponent
 
  <a class="nav-link" href="#" routerLink="/customers">Customers</a>
 
-===========
+========================
 
-Services ==> Resume @ 11:10
+Pipe: ==> to Transform data
+
+ng g pipe common/textconvert 
+
+=============
+
+Guard
+Angular route guards are interfaces provided by angular which when implemented allow us to control the accessibility of a route based on condition provided in class implementation of that interface.
 
 
+ CanActivate ==> to protect Routes
+ CanDeactivate ==> user opens Edit form; deactive all routes until user clicks "ok" and "cancel"
+	CanLoad ==> 	
+
+
+window.sessionStorage.setItem("user","banu")
+
+=========================================================================
+
+https://stackblitz.com/
+
+@ViewChild
+
+https://stackblitz.com/edit/ng-view-child
+
+=============
+
+ @ViewChildren(SecondComponent) viewChildren!: QueryList<SecondComponent>;
+
+ <second></second>
+ <second></second>
+ <second></second>
+
+================================
+
+ChangeDetectionPolicy
+	Default ==> whenever any data passed from parent to child using @Input() changes
+	the child component re-renders
+
+	Example: CustomersComponent has "customers" passed as @Input to CardComponent
+	In parent after delete or filter "customers" got changed; CardComponent re-renders
+
+===============
+
+https://stackblitz.com/edit/change
+
+=================================================
+
+* Service
+	==> business logic
+	==> api calls
+	==> share data between components [ need not be parent - child]
+
+Services are @Injectable ==> Enable Dependency Injection 
+
+Which Injector is going to inject Service ==> Module, root , Component
+
+By default Service is Singleton ==> only one instance
+
+===================
+
+rxjs ==> Reactive Programming ==> Netflix
+
+RxJS is a library for composing asynchronous and event-based programs by using observable sequences. 
+
+Observable: represents the idea of an invokable collection of future values or events.
+Observer: is a collection of callbacks that knows how to listen to values delivered by the Observable.
+Subscription: represents the execution of an Observable, is primarily useful for cancelling the execution.
+Subject:Observable + Observers.
+
+Promise ==> future value ==> resolve or reject ==> single value
+
+======================
+
+https://stackblitz.com/edit/rxjs-observableexample
+
+
+
+import { fromEvent } from "rxjs";
+
+import { debounceTime } from "rxjs/operators";
+
+let clicks = fromEvent(document, "click");
+
+let result = clicks.pipe(debounceTime(1000));
+
+result.subscribe(x => console.log(x));
+
+result.subscribe(x => console.log("clicked!!!"));
+
+
+==
+
+https://stackblitz.com/edit/rxjs-pipeexample
+
+import { range } from "rxjs";
+import { map, filter, scan } from "rxjs/operators";
+
+const source$ = range(0, 10);
+
+source$
+  .pipe(
+    filter(x => x % 2 === 0),
+    map(x => x + x)
+  );
+
+  source$.subscribe(x => console.log(x));
+  source$.subscribe(x => console.log(x));
+  source$.subscribe(x => console.log(x));
+
+======================
+
+Spring WebFlux 
+
+=============
+
+Anguar Service post lunch @2:00
+
+====================================
 

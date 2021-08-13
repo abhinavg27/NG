@@ -10,6 +10,8 @@ import { AppHoverDirective } from './common/app-hover.directive';
  
 import {Route, RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { TextconvertPipe } from './common/textconvert.pipe';
+import { LinkGuardGuard } from './link-guard.guard';
 
 const routes: Route[] = [
   {
@@ -26,6 +28,7 @@ const routes: Route[] = [
   },
   {
     path: 'orders',
+    canActivate: [LinkGuardGuard],
     loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
   },
   {
@@ -41,7 +44,8 @@ const routes: Route[] = [
     CustomersCardComponent,
     CustomersListComponent,
     AppHoverDirective,
-    HomeComponent
+    HomeComponent,
+    TextconvertPipe
   ],
   imports: [
     BrowserModule, FormsModule, RouterModule.forRoot(routes)
