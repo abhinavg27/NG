@@ -48,7 +48,8 @@ export class CustomerEditComponent implements OnInit {
   submit() {
      this.dataService.updateCustomer(this.customer)
           .subscribe(() => {
-            console.log("updated!!!")
+            console.log("updated!!!");
+            this.router.navigate(['/customers']);
         },
         (err: any) => console.log(err));
       
@@ -56,7 +57,7 @@ export class CustomerEditComponent implements OnInit {
   
   cancel(event: Event) {
     event.preventDefault();
-    this.router.navigate(['/customers']);
+    this.router.navigate(['/customers']); // <a href="#" routerLink="/customer"
   }
 
  

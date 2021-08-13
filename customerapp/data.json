@@ -19,21 +19,21 @@
       "firstName": "Monica",
       "lastName": "Geller",
       "gender": "female",
-      "address": "some address"
+      "address": "A & B Street, Bengaluru "
     },
     {
       "id": 5,
       "firstName": "Ross",
       "lastName": "Geller",
       "gender": "male",
-      "address": "some address "
+      "address": "M G  Road"
     },
     {
       "id": 6,
       "firstName": "Phoebe",
-      "lastName": "Buffay",
+      "lastName": "Bing",
       "gender": "female",
-      "address": "some address"
+      "address": "sdf "
     }
   ],
   "orders": [

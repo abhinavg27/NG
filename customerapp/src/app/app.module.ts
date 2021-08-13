@@ -12,12 +12,17 @@ import {Route, RouterModule} from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { TextconvertPipe } from './common/textconvert.pipe';
 import { LinkGuardGuard } from './link-guard.guard';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { MyHttpInterceptor } from './common/myhttpinterceptor';
 const routes: Route[] = [
   {
     path: 'customers',
     component :CustomersComponent
+  },
+  {
+    path: 'customers/edit/:id',
+    component :CustomerEditComponent
   },
   {
     path: 'home',
@@ -52,7 +57,11 @@ const routes: Route[] = [
   imports: [
     BrowserModule, FormsModule, HttpClientModule, RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: MyHttpInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
